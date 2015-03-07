@@ -2,7 +2,7 @@
 This project page describes several modifications made for my Gene
 Cafe coffee roaster.
 
-The roaster is controlled by a BeagleBone Black [1].
+The roaster is controlled by a BeagleBone Black [[1](#footnote-1)].
 
 The purpose of the modifications is to:
 - Enhance the control of the roaster to ensure consistent roasts
@@ -16,8 +16,8 @@ The current list of modifications is the following:
 - [x] [Control Interface](#control-interface)
 - [x] [Ingoing Air Temperature Probe](#ingoing-air-temperature-probe)
 - [x] [Remote Data Logging Software](#remote-data-logging-software)
-- [ ] [Remote Control/Monitor GUI Software](#remote-controlmonitor-gui-software)
-- [ ] [Outgoing Air Temperature Probe](#outgoing-air-temperature-probe)
+- [ ] [Remote Control/Monitor GUI Software](#remote-control-monitor-gui-software)
+- [ ] [Outgoing Air Temperature Probe](#outgoing-air-temperature)
 - [ ] [Automatic Bean Crack Detection](#automatic-bean-crack-detection)
 - [ ] [Linux Kernel Device Driver for the LCD Display](#linux-kernel-device-driver-for-the-lcd-display)
 
@@ -27,8 +27,8 @@ before the heating element of the roaster. The modification is similar
 to the one described at
 http://coffeetimex.wikidot.com/gene-cafe-dimmer-control-mod-stage-1. However,
 instead of using a dimmer module I have used an M028N power control module (4000 watt) from KEMO
-electronic [2]. The M028N is used with an M150 DC controller module
-[3] which allows the phase produced by the M028N to be controlled
+electronic [[2](#footnote-2)]. The M028N is used with an M150 DC controller module
+[[3](#footnote-3)] which allows the phase produced by the M028N to be controlled
 using a TTL signal (PWM/voltage).
 
 ## Control Interface
@@ -51,8 +51,8 @@ extruder. This has been done as described in
 https://plus.google.com/u/0/photos/103376994765292557175/albums/5848581250979871313.
 
 The thermocouple is connected to an Adafruit SPI-compatible max31855
-[4] breakout
-board [5]. The max31855 is connected to the BeagleBone.
+[[4](#footnote-4)] breakout
+board [[5](#footnote-5)]. The max31855 is connected to the BeagleBone.
 
 ## Remote Data Logging Software
 In order to log the roast profile (temperature, heater power, time, etc.)
@@ -65,6 +65,7 @@ script to plot the data.
 
 ## Remote Control/Monitor GUI Software
 
+
 ## Outgoing Air Temperature Probe
 
 ## Automatic Bean Crack Detection
@@ -73,11 +74,11 @@ script to plot the data.
 
 
 ----------
-\[1\]: http://beagleboard.org/BLACK  
-\[2\]:
+<a name="footnote-1"></a>\[1\]: http://beagleboard.org/BLACK  
+<a name="footnote-2"></a>\[2\]:
 http://www.kemo-electronic.de/en/Light-Sound/Effects/Modules/M028N-Power-control-110-240-V-AC-4000-VA.php  
-\[3\]:
+<a name="footnote-3"></a>\[3\]:
 http://www.kemo-electronic.de/en/Transformer-Dimmer/Converter/M150-DC-pulse-converter.php  
-\[4\]:
+<a name="footnote-4"></a>\[4\]:
 http://www.maximintegrated.com/en/products/analog/sensors-and-sensor-interface/MAX31855.html  
-\[5\]: http://www.adafruit.com/product/269  
+<a name="footnote-5"></a>\[5\]: http://www.adafruit.com/product/269  
