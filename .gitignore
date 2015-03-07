@@ -4,6 +4,7 @@
 *.obj
 *.elf
 *.dtbo
+roaster
 
 # Precompiled Headers
 *.gch
