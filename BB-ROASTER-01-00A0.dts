@@ -1,0 +1,80 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone", "ti,beaglebone-black";
+
+    /* identification */
+    part-number = "roaster0pinmux";
+    version = "00A0";
+
+    exclusive-use =
+                  /* LCD */
+                  "P8.40",
+                  "gpio2_13",
+                  "P8.39",
+                  "gpio2_12",
+                  "P8.42",
+                  "gpio2_11",
+                  "P8.41",
+                  "gpio2_10",
+                  "P8.30",
+                  "gpio2_25",
+                  "P8.27",
+                  "gpio2_22",
+
+                  /* Button */
+                  "P8.13",
+                  "gpio0_23",
+
+                  /* M150 */
+                  "P9.14",
+                  "ehrpwm1A";
+
+    fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+            roaster0_lcd_pins: roaster0_lcd_pins {
+                pinctrl-single,pins = <
+                  /* LCD */
+                  0x0bc 0x07  /* P8_40, output | pulldown | mode 7 */
+                  0x0b8 0x07  /* P8_39, output | pulldown | mode 7 */
+                  0x0b4 0x07  /* P8_42, output | pulldown | mode 7 */
+                  0x0b0 0x07  /* P8_41, output | pulldown | mode 7 */
+                  0x0ec 0x07  /* P8_30, output | pulldown | mode 7 */
+                  0x0e0 0x07  /* P8_27, output | pulldown | mode 7 */
+                  /* Button */
+                  0x024 0x27  /* P8_13, input | pulldown | mode 7 */                  
+                >;
+            };
+            roaster0_m150_pwm_pins: roaster0_m150_pwm_pins {
+                pinctrl-single,pins = <
+                  /* M150 */
+                  0x048 0x06  /* P9_14, INPUT_PULLDOWN | MODE6 */
+                >;
+            };
+        };
+    };
+
+    fragment@1 {
+        target = <&ocp>;
+        __overlay__ {
+             roaster0_lcd_gpio {
+               compatible = "bone-pinmux-helper";
+               pinctrl-names = "default";
+               pinctrl-0 = <&roaster0_lcd_pins>;
+               status = "okay";
+             };
+             roaster0_m150_pwm {
+   	       compatible = "pwm_test";
+   	       pwms = <&ehrpwm1 0 200000 1>; /* 5 kHz */
+   	       pwm-names  = "PWM_P9_14";
+   	       pinctrl-names = "default";
+   	       pinctrl-0 = <&roaster0_m150_pwm_pins>;
+   	       enabled = <1>;
+   	       duty = <0>;
+   	       status = "okay";
+	     };
+        };
+    };
+};
