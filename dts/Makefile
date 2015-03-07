@@ -1,19 +1,12 @@
 DTC = dtc
 DTCFLAGS = -O dtb -b 0
-DEV_TREE1 = BB-ROASTER-01-00A0.dts
-DEV_TREE1_OUT = $(DEV_TREE1:.dts=.dtbo)
-DEV_TREE2 = BB-ROASTERPWM-01-00A0.dts
-DEV_TREE2_OUT = $(DEV_TREE2:.dts=.dtbo)
+SOURCES = BB-ROASTER-01-00A0.dts BB-ROASTERPWM-01-00A0.dts BB-SPI0-01-00A0.dts
+OBJECTS = $(SOURCES:.dts=.dtbo)
 
-all: dtc
+all: $(SOURCES) $(OBJECTS)
 
-dtc: $(DEV_TREE1_OUT) $(DEV_TREE2_OUT)
-
-$(DEV_TREE1_OUT):
-	$(DTC) $(DTCFLAGS) -o $(DEV_TREE1_OUT) -@ $(DEV_TREE1)
-$(DEV_TREE2_OUT):
-	$(DTC) $(DTCFLAGS) -o $(DEV_TREE2_OUT) -@ $(DEV_TREE2)
+$(OBJECTS): $(SOURCES)
+	$(DTC) $(DTCFLAGS) -o $@ -@ $^
 
 clean:
-	-rm $(DEV_TREE1_OUT)
-	-rm $(DEV_TREE2_OUT)
+	-rm $(OBJECTS)
