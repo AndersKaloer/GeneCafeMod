@@ -16,8 +16,8 @@ The current list of modifications is the following:
 - [x] [Control Interface](#control-interface)
 - [x] [Ingoing Air Temperature Probe](#ingoing-air-temperature-probe)
 - [x] [Remote Data Logging Software](#remote-data-logging-software)
-- [ ] [Remote Control/Monitor GUI Software](#remote-control-monitor-gui-software)
-- [ ] [Outgoing Air Temperature Probe](#outgoing-air-temperature)
+- [ ] [Remote Control/Monitor GUI Software](#remote-controlmonitor-gui-software)
+- [ ] [Outgoing Air Temperature Probe](#outgoing-air-temperature-probe)
 - [ ] [Automatic Bean Crack Detection](#automatic-bean-crack-detection)
 - [ ] [Linux Kernel Device Driver for the LCD Display](#linux-kernel-device-driver-for-the-lcd-display)
 
