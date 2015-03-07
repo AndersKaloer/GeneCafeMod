@@ -5,7 +5,7 @@ OBJECTS = $(SOURCES:.dts=.dtbo)
 
 all: $(SOURCES) $(OBJECTS)
 
-$(OBJECTS): $(SOURCES)
+%.dtbo: %.dts
 	$(DTC) $(DTCFLAGS) -o $@ -@ $^
 
 clean:
