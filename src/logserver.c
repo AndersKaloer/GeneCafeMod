@@ -188,7 +188,7 @@ void broadcast_log(struct log_entry *entry) {
   packet_ptr += 4;
   *((uint32_t*)packet_ptr) = htonl((uint32_t)(entry->knop_val*100.0));
   packet_ptr += 4;
-  *((uint32_t*)packet_ptr) = htonl(entry->time_sec);
+  *((uint32_t*)packet_ptr) = htonl(entry->time_ms);
   packet_ptr += 4;
   *packet_ptr = (char)entry->pop;
   packet_ptr++;

@@ -78,9 +78,9 @@ void actuator_logserver_new_meas_hook(struct measurement *meas) {
   }
 }
 
-void actuator_logserver_new_time_hook(int abs_time, int rel_time) {
+void actuator_logserver_new_time_hook(struct timespec abs_time, struct timespec rel_time) {
   if(pthread_mutex_lock(&latest_entry_mtx) == 0) {
-    latest_entry.time_sec = abs_time;
+    latest_entry.time_ms = abs_time.tv_sec*1000 + abs_time.tv_nsec/1000000;
     pthread_mutex_unlock(&latest_entry_mtx);
   }
   

@@ -21,7 +21,7 @@ struct actuator_operations {
   /* Called when a new measurement is ready. */
   void (*new_measurement_hook) (struct measurement*);
   /* Called when the timer values have been updated. */
-  void (*new_time_hook) (int abs_time, int rel_time);
+  void (*new_time_hook) (struct timespec abs_time, struct timespec rel_time);
   /* Called when the overall system state has been updated. */
   void (*new_state_hook) (enum system_state old_state, enum system_state new_state);
 };

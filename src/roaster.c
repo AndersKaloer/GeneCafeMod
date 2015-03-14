@@ -98,17 +98,17 @@ static void *timer_monitor(void *arg) {
       }
       if(!clock_gettime(CLOCK_MONOTONIC, &cur)) {
         /* Calculate time diff */
-        int tot_time_sec = (cur.tv_sec - start.tv_sec);
-        int rel_time_sec = 0;
+        struct timespec diff_tot_time = time_diff(start, cur);
+        struct timespec diff_rel_time = {0};
         if(start_rel.tv_sec > 0) {
-          rel_time_sec = (cur.tv_sec - start_rel.tv_sec);
+          diff_rel_time = time_diff(start_rel, cur);
         }
         /* Notify change */
         struct actuator_list_item *aitem = actuator_list;
         while(aitem != NULL) {
           if(pthread_mutex_lock(&aitem->mutex) == 0) {
             if(aitem->desc->aops->new_time_hook != NULL) {
-              aitem->desc->aops->new_time_hook(tot_time_sec, rel_time_sec);
+              aitem->desc->aops->new_time_hook(diff_tot_time, diff_rel_time);
             }
             pthread_mutex_unlock(&aitem->mutex);
           }

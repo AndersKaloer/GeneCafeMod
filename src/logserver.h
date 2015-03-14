@@ -10,7 +10,7 @@ struct log_entry {
   uint8_t pop;
   float temp;
   float knop_val;
-  uint32_t time_sec;
+  uint32_t time_ms;
 };
 
 int logserver_start(void);
