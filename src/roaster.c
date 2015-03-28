@@ -118,9 +118,13 @@ static void *timer_monitor(void *arg) {
       if(clock_gettime(CLOCK_REALTIME, &max_time)) {
         fprintf(stderr, "Warning: Could not get time: %s\n", strerror(errno));
       }
-      /* Timeout after at most 1 sec */
-      max_time.tv_sec += 1;
-      max_time.tv_nsec = 0;
+      /* Sleep at most 100 msec */
+      max_time.tv_nsec += 100000000;
+      if(max_time.tv_nsec > 1000000000) {
+        /* More than 1 sec */
+        max_time.tv_sec += 1;
+        max_time.tv_nsec = 0;
+      }
       if(pthread_cond_timedwait(&timer_restart_cond, &timer_restart_mtx, &max_time) == 0) {
         /* Stop timer */
         timer_running = 0;
