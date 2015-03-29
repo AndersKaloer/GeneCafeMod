@@ -12,7 +12,7 @@ int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   sprintf(file, "%s/run", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
-    fprintf(stderr, "Could not open run\n");
+    fprintf(stderr, "Could not open PWM run file: %s\n", strerror(errno));
     goto err_run;
   }
   channel->pwm_fds.run_fd = fd;
@@ -20,7 +20,7 @@ int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   sprintf(file, "%s/polarity", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
-    fprintf(stderr, "Could not open polarity\n");
+    fprintf(stderr, "Could not open PWM polarity file: %s\n", strerror(errno));
     goto err_pol;
   }
   channel->pwm_fds.polarity_fd = fd;
@@ -28,7 +28,7 @@ int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   sprintf(file, "%s/duty", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
-    fprintf(stderr, "Could not open duty\n");
+    fprintf(stderr, "Could not open PWM duty file: %s\n", strerror(errno));
     goto err_duty;
   }
   channel->pwm_fds.duty_fd = fd;
@@ -36,7 +36,7 @@ int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   sprintf(file, "%s/period", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
-    fprintf(stderr, "Could not open period\n");
+    fprintf(stderr, "Could not open PWM period file: %s\n", strerror(errno));
     goto err_period;
   }
   channel->pwm_fds.period_fd = fd;
