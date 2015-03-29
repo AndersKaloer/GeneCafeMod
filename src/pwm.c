@@ -5,6 +5,7 @@
 #include <inttypes.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   FILE *fd;
