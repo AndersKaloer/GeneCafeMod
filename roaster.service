@@ -1,0 +1,9 @@
+[Unit]
+Description=Roaster
+
+[Service]
+WorkingDirectory=/home/anderskaloer/GeneCafeMod
+ExecStart=/bin/sh start_roaster.sh
+
+[Install]
+WantedBy=multi-user.target
