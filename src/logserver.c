@@ -163,9 +163,11 @@ static void broadcast_msg(const char *packet, int len) {
         fprintf(stderr, "Could not send log to client: %s\n", strerror(errno));
         close(client->sockfd);
         /* Remove client from list */
+        if(client->next != NULL) {
+          client->next->prev = client->prev;
+        }
         if(client->prev != NULL) {
           client->prev->next = client->next;
-          client->next->prev = client->prev;
         } else {
           /* First element */
           logclients = client->next;
