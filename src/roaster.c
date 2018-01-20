@@ -7,7 +7,8 @@
 #include "sensor_button.h"
 #include "actuator_lcd.h"
 #include "actuator_m150.h"
-#include "actuator_logserver.h"
+//#include "actuator_logserver.h"
+#include "actuator_filelogger.h"
 #include <unistd.h>
 #include <inttypes.h>
 #include <signal.h>
@@ -366,7 +367,8 @@ int main() {
   register_sensor(&sensor_button_desc);
   register_actuator(&actuator_lcd_desc);
   register_actuator(&actuator_m150_desc);
-  register_actuator(&actuator_logserver_desc);
+  //register_actuator(&actuator_logserver_desc);
+  register_actuator(&actuator_filelogger_desc);
 
   pthread_t timer_thread, peripheral_thread;
   if(pthread_create(&timer_thread, NULL, timer_monitor, NULL) != 0) {
