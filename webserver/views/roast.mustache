@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{roast.coffee}} {{roast.date_fmt}} - Roaster</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/Chart.bundle.min.js"></script>
+    <script src="/js/roast.js"></script>
+    <script>
+      roast = {
+        id: "{{{roastid}}}",
+        id_urlescaped: "{{{roastid_urlescaped}}}",
+        coffee: "{{{roast.coffee}}}",
+        date: new Date("{{{roast.date}}}"),
+        date_fmt: "{{{roast.date_fmt}}}",
+        degree: "{{{roast.roast_degree}}}",
+        rating: {{{roast.rating}}},
+        roast_comment: "{{{roast.comment}}}"
+      };
+      $(document).ready(function() {
+        load_roast_graph(roast);
+      });
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <span class="navbar-brand">Roaster</span>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>{{roast.coffee}}</h1>
+      <h3>{{roast.date_fmt}}</h3>
+      <form id="roast_desc_form">
+        <div class="form-group row">
+          <label for="inputId" class="col-sm-2 col-form-label">Roast ID</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputId"
+                   value="{{roastid}}" disabled>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputCoffee" class="col-sm-2 col-form-label">Coffee</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputCoffee" value="{{roast.coffee}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputRoastDegree" class="col-sm-2
+                                               col-form-label">Roast</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputRoastDegree" value="{{roast.roast_degree}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputRoastRating" class="col-sm-2
+                                               col-form-label">Rating</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputRoastRating" value="{{roast.rating}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputRoastComment" class="col-sm-2 col-form-label">Comments</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" id="inputRoastComment" rows="3">{{roast.comment}}</textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <span id="submit_spinner" style="display:none" class="oi oi-reload spinning"></span>
+          </div>
+          <div class="col-sm-2 offset-sm-8">
+            <div class="float-right">
+            <span id="delete_spinner" style="display:none" class="oi oi-reload spinning"></span>
+            <button id="delete_btn" type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+      <canvas id="roastChart"></canvas>
+    </div><!-- /.container -->
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roast History - Roaster</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <span class="navbar-brand">Roaster</span>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>Roast History</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Coffee</th>
+            <th scope="col">Roast degree</th>
+            <th scope="col">Date</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#roasts}}
+          <tr>
+            <th scope="row"><a href="/roast/{{id_urlescaped}}">{{index}}</a></th>
+            <td><a href="/roast/{{id_urlescaped}}">{{coffee}}</a></td>
+            <td><a href="/roast/{{id_urlescaped}}">{{roast_degree}}</a></td>
+            <td><a href="/roast/{{id_urlescaped}}">{{date_fmt}}</a></td>
+            <td><a href="/roast/{{id_urlescaped}}">{{rating}}</a></td>
+          </tr>
+          {{/roasts}}
+        </tbody>
+      </table>
+      
+
+    </div><!-- /.container -->
+  </body>
+</html>
