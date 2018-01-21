@@ -15,6 +15,7 @@ static enum system_state state;
 static struct measurement last_meas;
 static int has_pop = 0;
 static int has_meas = 0;
+static double last_update_time = -1.0;
 
 int actuator_filelogger_init(void) {
   return 0;
@@ -31,10 +32,12 @@ void actuator_filelogger_new_meas_hook(struct measurement *meas) {
 
 void actuator_filelogger_new_time_hook(struct timespec abs_time, struct timespec rel_time) {
   /* Write to file */
-  if(state == ACTIVE && has_meas) {
-          fprintf(logfile, "%0.3lf,%f,%f,%d\n", (double)abs_time.tv_sec + ((double)abs_time.tv_nsec)*1.0e-9,
+  double time = (double)abs_time.tv_sec + ((double)abs_time.tv_nsec)*1.0e-9;
+  if(state == ACTIVE && has_meas && time >= last_update_time+1.0) {
+          fprintf(logfile, "%0.3lf,%f,%f,%d\n", time,
             last_meas.knop_pct, last_meas.temp, has_pop);
     has_pop = 0;
+    last_update_time = time;
   }
 }
 
