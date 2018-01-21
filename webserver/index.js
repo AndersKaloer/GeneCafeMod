@@ -75,6 +75,7 @@ function load_roasts() {
             roast['id_urlescaped'] = querystring.escape(roast['id']);
             roasts.push(roast);
         } catch(e) {
+            console.log(e);
             // Skip
         }
     }
