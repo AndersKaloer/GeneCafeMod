@@ -141,6 +141,10 @@ function load_roast_data(roastid) {
         data['time'][i] = new Date(records[i]['time']*1000);
         data['data']['heat'][i] = records[i]['heat'];
         data['data']['temp'][i] = records[i]['temp'];
+        if(data['data']['temp'][i] < 5.0 && i > 0) {
+            // This is an error measurement - use prev. measurement
+            data['data']['temp'][i] = data['data']['temp'][i-1];
+        }
         data['data']['crack'][i] = (records[i]['crack']==='1' ? records[i]['temp'] : NaN);
     }
     delete records['heat'];
