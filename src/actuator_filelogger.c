@@ -47,12 +47,12 @@ void actuator_filelogger_new_state_hook(enum system_state old_state, enum system
       FILE *file = fopen(filename_buf, "w");
       if(file != NULL) {
         fprintf(file, "{"\
-                "'date': %ld,"             \
-                "'coffee': '',"             \
-                "'roast_degree': '',"       \
-                "'rating': 0,"              \
-                "'comment': ''"             \
-                "}", curtime);
+                "\"date\": %ld," \
+                "\"coffee\": \"\"," \
+                "\"roast_degree\": \"\"," \
+                "\"rating\": 0," \
+                "\"comment\": \"\"" \
+                "}\n", curtime);
         fclose(file);
       }
       sprintf(filename_buf, "roast_log/%ld/roast.csv", curtime);
