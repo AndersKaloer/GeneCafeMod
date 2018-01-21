@@ -6,7 +6,7 @@ struct adc_channel adc6_ch;
 
 int sensor_knop_init(void) {
   /* Initialize ADC for knop */
-  if(adc_init(&adc6_ch, "/sys/bus/iio/devices/iio:device0", 6, 0, 1.634)) {
+  if(adc_init(&adc6_ch, "/sys/bus/iio/devices/iio:device0", 6, 0, 3.720)) {
     fprintf(stderr, "Error: Knop ADC initialization failed\n");
     return -1;
   }
