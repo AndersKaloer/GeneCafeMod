@@ -55,7 +55,7 @@ app.delete('/roast/:roastid', function (req, res) {
     res.sendStatus(200);
 })
 
-app.listen(3000, () => console.log('Roaster web server listening on port 3000!'))
+app.listen(80, () => console.log('Roaster web server listening on port 3000!'))
 
 
 function load_roasts() {
