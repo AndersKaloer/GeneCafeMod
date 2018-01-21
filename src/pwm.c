@@ -9,7 +9,7 @@
 
 int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   FILE *fd;
-  char file[50];
+  char file[100];
   sprintf(file, "%s/enable", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
