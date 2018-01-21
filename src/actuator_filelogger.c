@@ -31,7 +31,7 @@ void actuator_filelogger_new_meas_hook(struct measurement *meas) {
 void actuator_filelogger_new_time_hook(struct timespec abs_time, struct timespec rel_time) {
   /* Write to file */
   if(state == ACTIVE && has_meas) {
-    fprintf(logfile, "%ld,%f,%f,%d\n", abs_time.tv_sec,
+          fprintf(logfile, "%0.3lf,%f,%f,%d\n", (double)abs_time.tv_sec + ((double)abs_time.tv_nsec)*1.0e-9,
             last_meas.knop_pct, last_meas.temp, has_pop);
     has_pop = 0;
   }
