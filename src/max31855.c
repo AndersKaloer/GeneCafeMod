@@ -22,17 +22,17 @@ static int max31855_check_failures(uint32_t val) {
     /* Some error */
     if(val & 0x1) {
       /* Open circuit fault */
-      fprintf(stderr, "max31855: read failure: open circuit\n");
+      //fprintf(stderr, "max31855: read failure: open circuit\n");
       retval = -1;
     }
     if(val & 0x2) {
       /* Short to GND fault */
-      fprintf(stderr, "max31855: read failure: short to gnd\n");
+      //fprintf(stderr, "max31855: read failure: short to gnd\n");
       retval = -2;
     }
     if(val & 0x4) {
       /* Short to Vcc fault */
-      fprintf(stderr, "max31855: read failure: short to vcc\n");
+      //fprintf(stderr, "max31855: read failure: short to vcc\n");
       retval = -3;
     }    
   }
