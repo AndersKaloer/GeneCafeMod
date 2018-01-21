@@ -51,6 +51,8 @@ void actuator_filelogger_new_state_hook(enum system_state old_state, enum system
                 "\"date\": %ld," \
                 "\"coffee\": \"\"," \
                 "\"roast_degree\": \"\"," \
+                "\"pre_roast_weight\": 0," \
+                "\"post_roast_weight\": 0," \
                 "\"rating\": 0," \
                 "\"comment\": \"\"" \
                 "}\n", curtime);

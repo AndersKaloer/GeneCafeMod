@@ -19,6 +19,8 @@
         date: new Date("{{{roast.date}}}"),
         date_fmt: "{{{roast.date_fmt}}}",
         degree: "{{{roast.roast_degree}}}",
+        pre_weight: "{{{roast.pre_roast_weight}}}",
+        post_weight: "{{{roast.post_roast_weight}}}",
         rating: {{{roast.rating}}},
         roast_comment: "{{{roast.comment}}}"
       };
@@ -59,9 +61,23 @@
         </div>
         <div class="form-group row">
           <label for="inputRoastDegree" class="col-sm-2
-                                               col-form-label">Roast</label>
+                                               col-form-label">Roast deg.</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="inputRoastDegree" value="{{roast.roast_degree}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputRoastPreWeight" class="col-sm-2
+                                               col-form-label">Pre weight</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputRoastPreWeight" value="{{roast.pre_weight}}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputRoastPostWeight" class="col-sm-2
+                                               col-form-label">Post weight</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputRoastPostWeight" value="{{roast.post_weight}}">
           </div>
         </div>
         <div class="form-group row">
