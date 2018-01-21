@@ -167,7 +167,19 @@ function save_roast_metadata(roastid, data) {
         metadata[key] = data[key];
     }
     // Save
-    fs.writeFileSync(meta_file, JSON.stringify(metadata));
+    let meta_fd;
+    try {
+        meta_fd = fs.openSync(meta_file, 'w');
+        fs.writeFileSync(meta_fd, JSON.stringify(metadata));
+        // Force sync
+        fs.fsyncSync(meta_fd);
+    } catch(err) {
+        console.log(err);
+    } finally {
+        if(meta_fd !== undefined) {
+            fs.close(meta_fd);
+        }
+    }
 }
 
 function delete_roast(roastid) {

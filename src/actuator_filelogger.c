@@ -1,6 +1,7 @@
 #include "actuator_filelogger.h"
 #include <time.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <string.h>
 
@@ -53,6 +54,9 @@ void actuator_filelogger_new_state_hook(enum system_state old_state, enum system
                 "\"rating\": 0," \
                 "\"comment\": \"\"" \
                 "}\n", curtime);
+        /* Force sync */
+        fflush(file);
+        fsync(fileno(file));
         fclose(file);
       }
       sprintf(filename_buf, "roast_log/%ld/roast.csv", curtime);
@@ -62,6 +66,9 @@ void actuator_filelogger_new_state_hook(enum system_state old_state, enum system
       }
     }
   } else if(old_state == ACTIVE && new_state == IDLE) {
+    /* Force sync */
+    fflush(logfile);
+    fsync(fileno(logfile));
     /* Close file */
     fclose(logfile);
   }
