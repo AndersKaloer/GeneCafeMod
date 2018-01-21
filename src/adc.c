@@ -8,7 +8,7 @@
 #include <errno.h>
 
 int adc_init(struct adc_channel *channel, char *sys_directory, uint8_t adc_num, float min_val, float max_val) {
-  sprintf(channel->fname, "%s/AIN%u", sys_directory, adc_num);
+  sprintf(channel->fname, "%s/in_voltage%u_raw", sys_directory, adc_num);
   channel->max_val = max_val;
   channel->min_val = min_val;
   return 0;

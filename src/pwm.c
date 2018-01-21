@@ -10,7 +10,7 @@
 int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   FILE *fd;
   char file[50];
-  sprintf(file, "%s/run", sys_dir);
+  sprintf(file, "%s/enable", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
     fprintf(stderr, "Could not open PWM run file: %s\n", strerror(errno));
@@ -26,7 +26,7 @@ int pwm_fd_open(struct pwm_channel *channel, char *sys_dir) {
   }
   channel->pwm_fds.polarity_fd = fd;
   
-  sprintf(file, "%s/duty", sys_dir);
+  sprintf(file, "%s/duty_cycle", sys_dir);
   fd = fopen(file, "w");
   if(fd == NULL) {
     fprintf(stderr, "Could not open PWM duty file: %s\n", strerror(errno));

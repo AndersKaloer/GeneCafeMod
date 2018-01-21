@@ -6,8 +6,8 @@ struct pwm_channel pwm_ch;
 
 int actuator_m150_init(void) {
   /* Initialize PWM */
-  if(pwm_init(&pwm_ch, "/sys/devices/ocp.3/roaster0_m150_pwm.13")) {
-    fprintf(stderr, "Error: LCD initialization failed\n");
+  if(pwm_init(&pwm_ch, "/sys/devices/platform/ocp/48302000.epwmss/48302200.pwm/pwm/pwmchip0/pwm1")) {
+    fprintf(stderr, "Error: M150 initialization failed\n");
     return -1;    
   }
   pwm_start(&pwm_ch);
