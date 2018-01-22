@@ -69,6 +69,10 @@ void actuator_filelogger_new_state_hook(enum system_state old_state, enum system
       if(file != NULL) {
         fprintf(logfile, "time,heat,temp,crack\n");
       }
+      /* Reset state variables */
+      has_pop = 0;
+      last_update_time = -1;
+      has_meas = 0;
     }
   } else if(old_state == ACTIVE && new_state == IDLE) {
     /* Force sync */
