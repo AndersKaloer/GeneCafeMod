@@ -174,7 +174,7 @@ function save_roast_metadata(roastid, data) {
     let meta_fd;
     try {
         meta_fd = fs.openSync(meta_file, 'w');
-        fs.writeFileSync(meta_fd, JSON.stringify(metadata));
+        fs.writeFileSync(meta_fd, JSON.stringify(metadata) + "\n");
         // Force sync
         fs.fsyncSync(meta_fd);
     } catch(err) {
