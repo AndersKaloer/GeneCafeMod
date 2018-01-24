@@ -165,7 +165,7 @@ function load_roast_data(roastid) {
     };
     for(var i=0; i < records.length; i++) {
         data['time'][i] = new Date(records[i]['time']*1000);
-        data['data']['heat'][i] = records[i]['heat'];
+        data['data']['heat'][i] = records[i]['heat']*100.0;
         data['data']['temp'][i] = records[i]['temp'];
         if(data['data']['temp'][i] < 5.0 && i > 0) {
             // This is an error measurement - use prev. measurement
