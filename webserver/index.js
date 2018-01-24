@@ -149,7 +149,9 @@ function load_roast_data(roastid) {
     }
 
 
-    var content = fs.readFileSync(log_file);
+    var content = fs.readFileSync(log_file, 'ascii');
+    // Remove last line if incomplete (we read while data is being written)
+    content = content.substring(0, content.lastIndexOf("\n")+1);
     var parser = csvParser()
     var records = csvParser(content, {columns: true});
 
