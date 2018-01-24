@@ -1,6 +1,6 @@
 const express = require('express')
 const fs = require('fs');
-const mustacheExpress = require('mustache-express');
+const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const csvParser = require('csv-parse/lib/sync');
 
@@ -8,10 +8,23 @@ const csvParser = require('csv-parse/lib/sync');
 const app = express()
 var router = express.Router();
 
-// Register '.mustache' extension with The Mustache Express
-app.engine('mustache', mustacheExpress());
-app.set('view engine', 'mustache');
-app.set('views', __dirname + '/views');
+var hbs = exphbs.create({
+    helpers: {
+        escapejs: function (obj) {
+            return obj.replace(/[\\]/g, '\\\\')
+                .replace(/[\"]/g, '\\\"')
+                .replace(/[\/]/g, '\\/')
+                .replace(/[\b]/g, '\\b')
+                .replace(/[\f]/g, '\\f')
+                .replace(/[\n]/g, '\\n')
+                .replace(/[\r]/g, '\\r')
+                .replace(/[\t]/g, '\\t');
+        }
+    }
+});
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -55,7 +68,8 @@ app.delete('/roast/:roastid', function (req, res) {
     res.sendStatus(200);
 })
 
-app.listen(80, () => console.log('Roaster web server listening on port 3000!'))
+const port = 80;
+app.listen(port, () => console.log('Roaster web server listening on port ' + port + '!'))
 
 
 function load_roasts() {

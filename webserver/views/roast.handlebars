@@ -13,16 +13,16 @@
     <script src="/js/roast.js"></script>
     <script>
       roast = {
-        id: "{{{roastid}}}",
-        id_urlescaped: "{{{roastid_urlescaped}}}",
-        coffee: "{{{roast.coffee}}}",
+        id: "{{{escapejs roastid}}}",
+        id_urlescaped: "{{{escapejs roastid_urlescaped}}}",
+        coffee: "{{{escapejs roast.coffee}}}",
         date: new Date("{{{roast.date}}}"),
-        date_fmt: "{{{roast.date_fmt}}}",
-        degree: "{{{roast.roast_degree}}}",
-        pre_weight: "{{{roast.pre_roast_weight}}}",
-        post_weight: "{{{roast.post_roast_weight}}}",
+        date_fmt: "{{{escapejs roast.date_fmt}}}",
+        degree: "{{{escapejs roast.roast_degree}}}",
+        pre_weight: {{{roast.pre_roast_weight}}},
+        post_weight: {{{roast.post_roast_weight}}},
         rating: {{{roast.rating}}},
-        roast_comment: "{{{roast.comment}}}"
+        roast_comment: "{{{escapejs roast.comment}}}"
       };
       $(document).ready(function() {
         load_roast_graph(roast);
@@ -68,14 +68,14 @@
         </div>
         <div class="form-group row">
           <label for="inputRoastPreWeight" class="col-sm-2
-                                               col-form-label">Pre weight</label>
+                                               col-form-label">Pre weight (g)</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="inputRoastPreWeight" value="{{roast.pre_roast_weight}}">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputRoastPostWeight" class="col-sm-2
-                                               col-form-label">Post weight</label>
+                                               col-form-label">Post weight (g)</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="inputRoastPostWeight" value="{{roast.post_roast_weight}}">
           </div>
