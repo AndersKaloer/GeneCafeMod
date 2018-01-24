@@ -89,9 +89,9 @@ $(document).ready(function() {
         var newRoast = {
             'coffee': $('#inputCoffee').val(),
             'roast_degree' : $('#inputRoastDegree').val(),
-            'pre_roast_weight' : $('#inputRoastPreWeight').val(),
-            'post_roast_weight' : $('#inputRoastPostWeight').val(),
-            'rating' : $('#inputRoastRating').val(),
+            'pre_roast_weight' : parseInt($('#inputRoastPreWeight').val()),
+            'post_roast_weight' : parseInt($('#inputRoastPostWeight').val()),
+            'rating' : parseInt($('#inputRoastRating').val()),
             'comment' : $('#inputRoastComment').val()
         };
         $.ajax({
