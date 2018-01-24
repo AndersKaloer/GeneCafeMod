@@ -42,18 +42,28 @@ app.get('/roast/:roastid', function (req, res) {
     var querystring = require('querystring');
     var roastid = req.params['roastid'];
     var roastid_urlescaped = querystring.escape(roastid);
-    var roast_params = load_roast(roastid);
-    res.render('roast', {
-        roast: roast_params,
-        roastid: roastid,
-        roastid_urlescaped: roastid_urlescaped,
-    });
+    try {
+        var roast_params = load_roast(roastid);
+        res.render('roast', {
+            roast: roast_params,
+            roastid: roastid,
+            roastid_urlescaped: roastid_urlescaped,
+        });
+    } catch(e) {
+        console.log(e);
+        throw e;
+    }
 })
 
 app.get('/roast/data/:roastid.json', function (req, res) {
     var roastid = req.params['roastid'];
+    try {
     var roast_data = load_roast_data(roastid);
-    res.send(roast_data);
+        res.send(roast_data);
+    } catch(e) {
+        console.log(e);
+        throw e;
+    }
 })
 
 app.post('/roast/:roastid', function (req, res) {
