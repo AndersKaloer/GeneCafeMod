@@ -26,7 +26,10 @@ void actuator_filelogger_cleanup(void) {
 
 void actuator_filelogger_new_meas_hook(struct measurement *meas) {  
   memcpy(&last_meas, meas, sizeof(struct measurement));
-  has_pop = last_meas.pop; /* Ensure to register pop */
+  if(last_meas.pop) {
+    /* Ensure to register pop */
+    has_pop = 1;
+  }
   has_meas = 1;
 }
 
