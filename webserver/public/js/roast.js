@@ -1,3 +1,37 @@
+// Thanks https://stackoverflow.com/questions/30256695/chart-js-drawing-an-arbitrary-vertical-line/43092029#43092029
+const verticalLinePlugin = {
+    getLinePosition: function (chart, pointIndex) {
+        const meta = chart.getDatasetMeta(0); // first dataset is used to discover X coordinate of a point
+        const data = meta.data;
+        return data[pointIndex]._model.x;
+    },
+    renderVerticalLine: function (chartInstance, pointIndex) {
+        const lineLeftOffset = this.getLinePosition(chartInstance, pointIndex);
+        const scale = chartInstance.scales['y-axis-0'];
+        const context = chartInstance.chart.ctx;
+
+        // render vertical line
+        context.beginPath();
+        context.strokeStyle = '#ff0000';
+        context.moveTo(lineLeftOffset, scale.top);
+        context.lineTo(lineLeftOffset, scale.bottom);
+        context.stroke();
+
+        // write label
+        context.fillStyle = "#ff0000";
+        context.textAlign = 'right';
+        context.fillText('Crack', lineLeftOffset-5, (scale.bottom - scale.top) / 2 + scale.top);
+    },
+
+    afterDatasetsDraw: function (chart, easing) {
+        if (chart.config.lineAtIndex) {
+            chart.config.lineAtIndex.forEach(pointIndex => this.renderVerticalLine(chart, pointIndex));
+        }
+    }
+};
+
+Chart.plugins.register(verticalLinePlugin);
+
 function load_roast_graph(roast) {
     $.ajax({
         type: 'get',
@@ -7,26 +41,15 @@ function load_roast_graph(roast) {
             var ctx = document.getElementById("roastChart").getContext('2d');
             var roastChart = new Chart(ctx, {
                 type: 'line',
+                lineAtIndex: data['crack'],
                 data: {
                     labels: data['time'],
                     datasets: [
                         {
-                            label: 'Cracks',
-                            data: data['data']['crack'],
-                            fill: false,
-                            showLine: false,
-                            pointStyle: 'star',
-                            pointRadius: 10,
-                            yAxisID: 'tempAxis',
-                            pointBorderWidth: 5,
-                            borderColor: '#466365',
-                            backgroundColor: '#466365'
-                        },
-                        {
                             label: 'Heat',
                             data: data['data']['heat'],
                             fill: false,
-                            yAxisID: 'percentAxis',
+                            yAxisID: 'y-axis-1',
                             borderColor: '#F4C95D',
                             backgroundColor: '#F4C95D'
                         },
@@ -34,7 +57,7 @@ function load_roast_graph(roast) {
                             label: 'Temp.',
                             data: data['data']['temp'],
                             fill: false,
-                            yAxisID: 'tempAxis',
+                            yAxisID: 'y-axis-0',
                             borderColor: '#DD7230',
                             backgroundColor: '#DD7230'
                         }]
@@ -56,7 +79,7 @@ function load_roast_graph(roast) {
                         }],
                         yAxes: [
                             {
-                                id: 'tempAxis',
+                                id: 'y-axis-0',
                                 scaleLabel: {
                                     display: true,
                                     labelString: '°C'
@@ -65,7 +88,7 @@ function load_roast_graph(roast) {
                                 position: 'left'
                             },
                             {
-                                id: 'percentAxis',
+                                id: 'y-axis-1',
                                 scaleLabel: {
                                     display: true,
                                     labelString: '%'
@@ -80,6 +103,7 @@ function load_roast_graph(roast) {
         }
     })
 }
+
 
 $(document).ready(function() {
     $("#roast_desc_form").submit(function(event) {

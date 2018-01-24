@@ -159,9 +159,9 @@ function load_roast_data(roastid) {
         'time': new Array(records.length),
         'data': {
             'heat': new Array(records.length),
-            'temp': new Array(records.length),
-            'crack': new Array(records.length),
-        }
+            'temp': new Array(records.length)
+        },
+        'crack': new Array(),
     };
     for(var i=0; i < records.length; i++) {
         data['time'][i] = new Date(records[i]['time']*1000);
@@ -171,7 +171,9 @@ function load_roast_data(roastid) {
             // This is an error measurement - use prev. measurement
             data['data']['temp'][i] = data['data']['temp'][i-1];
         }
-        data['data']['crack'][i] = (records[i]['crack']==='1' ? records[i]['temp'] : NaN);
+        if(records[i]['crack']==='1') {
+            data['crack'].push(i);
+        }
     }
     delete records['heat'];
     delete records['temp'];
